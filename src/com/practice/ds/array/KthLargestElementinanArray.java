@@ -18,6 +18,7 @@ public class KthLargestElementinanArray {
 
 	public int findKthLargest(int[] nums, int k) {
 		Queue<Integer> q = new PriorityQueue<Integer>(k, (i, j) -> j - i);
+		
 		for (Integer n : nums) {
 			q.add(n);
 		}
