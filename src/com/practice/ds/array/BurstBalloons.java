@@ -31,6 +31,8 @@ public class BurstBalloons {
 			max = Math.max(max, dp[i] + maxCoins(subArray));
 		}
 		
+		System.out.println("bursting x`ballonw");
+		
 		return max;
 	}
 	
