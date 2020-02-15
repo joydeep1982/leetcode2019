@@ -49,32 +49,47 @@ public class OddEvenLinkedList {
 	}
 
 	public ListNode oddEvenList(ListNode head) {
-		if (head == null || head.next == null)
-			return head;
-		ListNode odd = head;
-		ListNode prev_odd = head;
-		int counter = 0;
-		ListNode prev = null;
-
-		while (odd.next != null) {
-			prev = odd;
-			odd = odd.next;
-			counter++;
-
-			if (counter % 2 == 0) {
-				if(counter == 10) {
-					System.out.println(counter);
-				}
-				prev.next = odd.next;
-				odd.next = prev;
-				prev_odd.next = odd;
-
-				ListNode temp = odd;
-				odd = prev;
-				prev = temp;
-			}
-		}
-		
-		return head;
+		if (head == null || head.next == null || head.next.next == null) return head;
+        ListNode eHead = null;
+        ListNode eTail = null;
+        
+        ListNode ptr = head.next;
+        ListNode prev = head;
+        
+        int count = 1;
+        ListNode lastOddPtr = null;
+        while (ptr != null) {
+            count++;
+            if (count % 2 == 0) {
+                // when we enter this loop
+                // ptr is on an even node
+                // prev is on an odd node
+                if (eHead == null) {
+                    eHead = ptr;
+                    eTail = ptr;
+                }
+                else {
+                    eTail.next = ptr;
+                    eTail = ptr;
+                }
+                prev.next = ptr.next;    
+            }
+            else {
+            	lastOddPtr = ptr;
+            }
+            
+            //eTail.next = null;
+            
+            // advance pointers
+            prev = ptr;
+            if (ptr.next == null && lastOddPtr != null) {
+            	eTail.next = null;
+            	lastOddPtr.next  = eHead;
+            	break;
+            }
+            ptr = ptr.next;
+        }
+        
+        return head;
 	}
 }

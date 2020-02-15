@@ -6,51 +6,56 @@
 package com.practice.ds.tree;
 
 import com.practice.ds.beans.TreeNode;
+import com.practice.ds.miscell.Utils;
 
 public class BinaryTreeMaximumPathSum {
 
 	public static void main(String[] args) {
-		BinaryTreeMaximumPathSum obj =  new BinaryTreeMaximumPathSum();
-		
-		TreeNode _ten = new TreeNode(-10);
-		TreeNode nine =  new TreeNode(9);
-		TreeNode twenty = new TreeNode(20);
-		TreeNode fifteen = new TreeNode(15);
-		TreeNode seven = new TreeNode(7);
-		
-		TreeNode two = new TreeNode(2);
-		TreeNode _one = new TreeNode(-1);
-		two.left = _one;
-		
-		
-		TreeNode node1 = new TreeNode(1);
-		TreeNode node2 = new TreeNode(2);
-		TreeNode node3 = new TreeNode(3);
-		
-		node1.left = node2;
-		node1.right = node3;
-		
-//		_ten.left = nine;
-//		_ten.right = twenty;
-//		twenty.left = fifteen;
-//		twenty.right = seven;
-		
-		int sum = obj.maxPathSum(two);
+		BinaryTreeMaximumPathSum obj = new BinaryTreeMaximumPathSum();
+
+		TreeNode root = Utils.buildTree(new Integer[] {5,4,8,11,null,13,4,7,2,null,null,null,1}, 0);
+
+		int sum = obj.maxPathSum(root);
 		System.out.println(sum);
 	}
-	
+
 	public int maxPathSum(TreeNode node) {
-		if (node == null) return  Integer.MIN_VALUE;
+		if (node == null)
+			return Integer.MIN_VALUE;
+
+		int leftval = maxPathSum(node.left);
+
+		int rightval = maxPathSum(node.right);
+
+		int allsum = node.val + (node.left == null ? 0 : leftval) + (node.right == null ? 0 : rightval);
+		leftval = node.left == null ? Integer.MIN_VALUE : Math.max(leftval, node.left.val + node.val);
+		rightval = node.right == null ? Integer.MIN_VALUE : Math.max(rightval, node.right.val + node.val);
 		
-		int valRight = (node.right != null ? node.right.val : 0);
-		int valLeft = (node.left != null ? node.left.val : 0);
+		int ret = Math.max(Math.max(Math.max(node.val, leftval), rightval), allsum);
 		
-		int sum = valRight + valLeft + node.val;
-		
-		sum  = Math.max(sum, Math.max(node.val + valLeft, node.val + valRight));
-		sum = Math.max(sum, node.val);
-		return Math.max(Math.max(sum, maxPathSum(node.left)), maxPathSum(node.right));
-		
-    }
-	
+		System.out.println("for node " + node.val);
+		System.out.println("all: " + allsum);
+		System.out.println("left: " + leftval);
+		System.out.println("right: " + rightval);
+		System.out.println("choosing: " + ret);
+		System.out.println();
+		System.out.println();
+
+		return ret;
+	}
+
+//	public int maxPathSum(TreeNode node) {
+//		if (node == null) return  Integer.MIN_VALUE;
+//		
+//		int valRight = (node.right != null ? node.right.val : 0);
+//		int valLeft = (node.left != null ? node.left.val : 0);
+//		
+//		int sum = valRight + valLeft + node.val;
+//		
+//		sum  = Math.max(sum, Math.max(node.val + valLeft, node.val + valRight));
+//		sum = Math.max(sum, node.val);
+//		return Math.max(Math.max(sum, maxPathSum(node.left)), maxPathSum(node.right));
+//		
+//    }
+
 }

@@ -11,9 +11,9 @@ public class NumberOfDiceRollsWithTargetSum {
 
 	public static void main(String[] args) {
 		NumberOfDiceRollsWithTargetSum obj = new NumberOfDiceRollsWithTargetSum();
-//		obj.numRollsToTarget(3, 6, 11);
+		obj.numRollsToTarget(3, 6, 11);
 //		obj.numRollsToTarget(2, 5, 10);
-		obj.numRollsToTarget(30, 30, 500);
+//		obj.numRollsToTarget(30, 30, 500);
 	}
 
 	public int numRollsToTarget(int d, int f, int target) {
