@@ -1,4 +1,4 @@
-package com.practice.ds.graph;
+package com.practice.ds.sort;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -13,4 +13,10 @@ public class TreeNode {
 		this.left = null;
 		this.right = null;
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.val + "";
+	}
 }

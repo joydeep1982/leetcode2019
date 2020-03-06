@@ -24,8 +24,17 @@ public class ReverseLinkedList {
 		four.next = five;
 		five.next = null;
 		
-		ListNode newHead = obj.reverseList(one);
+		ListNode newHead = obj.reverse(one);
 		obj.print(newHead);
+	}
+	
+	public ListNode reverse(ListNode node) {
+		if (node == null) {
+			return node;
+		}
+		reverse(node.next);
+		System.out.println(node.val);
+		return null;
 	}
 	
 	public void print(ListNode n) {
@@ -43,15 +52,12 @@ public class ReverseLinkedList {
         ListNode h = head;
         
         while (p2 != null) {
-        	
         	ListNode temp = p2.next;
-        	
         	p1.next = p2.next;
         	p2.next = h;
         	h = p2;
         	
         	p2 = temp;
-        	
         }
 		return h;
     }

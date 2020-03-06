@@ -1,4 +1,4 @@
-package com.practice.ds.array;
+package com.practice.ds.sort;
 
 import com.practice.ds.miscell.Utils;
 

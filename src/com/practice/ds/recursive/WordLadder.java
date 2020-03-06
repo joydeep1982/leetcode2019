@@ -6,9 +6,11 @@
 package com.practice.ds.recursive;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -26,11 +28,65 @@ public class WordLadder {
 		wordList.add("cog");
 //		wordList.add("hog");
 
-		int min = obj.ladderLength("hit", "dot", wordList);
+		int min = obj.ladderLength("hit", "cog", wordList);
 		System.out.println(min);
 	}
+	
+	public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+		
+		Map<String, List<String>> mapper = new HashMap<String, List<String>>();
+		
+		for (String word : wordList) {
+			for (int i = 0; i < word.length(); i++) {
+				String newWord = word.substring(0, i) + "*" + word.substring(i + 1, word.length());
+				//System.out.println(newWord);
+				List<String> children = mapper.getOrDefault(newWord, new ArrayList<String>());
+				children.add(word);
+				mapper.put(newWord, children);
+			}
+		}
+		
+		Set<String> alreadyProcessed = new HashSet<String>();
+		Queue<String> q = new LinkedList<String>();
+		q.add(beginWord);
+		int level = 0;
+		
+		outer:
+		while (!q.isEmpty()) {
+			int size = q.size();
+			
+			level++;
+			
+			for (int i = 0; i < size; i++) {
+				
+				String word = q.poll();
+				
+				if (alreadyProcessed.contains(word)) {
+					continue;
+				}
+				alreadyProcessed.add(word);
+				
+				for (int x = 0; x < level; x++) {
+					System.out.print("-");
+				}
+				System.out.print("Processing " + word);
+				System.out.println();
+				
+				if (word.equals(endWord)) {
+					break outer;
+				}
+				
+				for (int j = 0; j < word.length(); j++) {
+					String transformedWord = word.substring(0, j) + "*" + word.substring(j + 1, word.length());
+					q.addAll(mapper.getOrDefault(transformedWord, new ArrayList<String>()));
+				}
+			}
+		}
+		
+		return level;
+	}
 
-	public int ladderLength1(String beginWord, String endWord, List<String> wordList) {
+	/*public int ladderLength1(String beginWord, String endWord, List<String> wordList) {
 
 		return 0;
 	}
@@ -78,5 +134,5 @@ public class WordLadder {
 			}
 		}
 		System.out.println("Added to queue: " + list);
-	}
+	}*/
 }

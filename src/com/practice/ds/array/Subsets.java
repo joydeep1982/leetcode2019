@@ -14,7 +14,7 @@ public class Subsets {
 
 	public static void main(String[] args) {
 		Subsets obj = new Subsets();
-		List<List<Integer>> results = obj.subsets(new int[] { 1, 2, 3, 4 });
+		List<List<Integer>> results = obj.subsets(new int[] { 1, 2, 3, 4, 5, 6 });
 		for (List<Integer> list : results) {
 			System.out.println(list);
 		}

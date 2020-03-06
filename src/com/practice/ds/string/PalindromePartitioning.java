@@ -14,11 +14,14 @@ public class PalindromePartitioning {
 
 	public static void main(String[] args) {
 		PalindromePartitioning obj = new PalindromePartitioning();
-		List<List<String>> results = obj.partition("aab");
+		List<List<String>> results = obj.partition("dnncbwoneinoplypwgbwktmvkoimcooyiwirgbxlcttgteqthcvyoueyftiwgwwxvxvg");
 
-		for (List<String> result : results) {
-			System.out.println(result);
-		}
+//		int count = 0;
+//		for (List<String> result : results) {
+//			count++;
+//			System.out.print(count + " ");
+//			System.out.println(result);
+//		}
 	}
 
 	public List<List<String>> partition(String s) {
@@ -48,18 +51,29 @@ public class PalindromePartitioning {
 				palin[i][j] = s.charAt(i) == s.charAt(j) && palin[i][j - 2];
 			}
 		}
+		
+		List<String> x = new ArrayList<String>();
 
 		Utils.print(palin, "T", "-");
-
+		int count = 0;
 		// result collection
 		for (int i = 0; i < len; i++) {
 			List<String> r = new ArrayList<String>();
 			for (int j = i; j < len; j++) {
 				if (palin[i][j]) {
 					r.add(s.substring(i, j + 1));
+					x.add(s.substring(i, j+ 1));
+					count++;
 				}
 			}
 			result.add(r);
+		}
+		
+		count = 0;
+		for (String xx : x) {
+			count++;
+			System.out.print(count + " ");
+			System.out.println(xx);
 		}
 
 		return result;

@@ -7,7 +7,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
 	public static void main(String[] args) {
 		LongestSubstringWithoutRepeatingCharacters obj = new LongestSubstringWithoutRepeatingCharacters();
-		int longest = obj.lengthOfLongestSubstring("xabcacbbb");
+		int longest = obj.lengthOfLongestSubstring("clementisacap");
 		System.out.println(longest);
 	}
 
@@ -26,7 +26,11 @@ public class LongestSubstringWithoutRepeatingCharacters {
 			if (!set.contains(s.charAt(b_ptr))) {
 				set.add(s.charAt(b_ptr));
 				b_ptr++;
-				max = Math.max(max, set.size());
+				if (set.size() > max) {
+					max = set.size();
+					System.out.println(s.substring(a_ptr, b_ptr + 1));
+				}
+//				max = Math.max(max, set.size());
 			} else {
 				set.remove(s.charAt(a_ptr));
 				a_ptr++;
