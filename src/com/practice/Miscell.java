@@ -10,10 +10,28 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class Miscell {
 	
 	public static void main(String[] args) {
+		PriorityQueue<X> pq = new PriorityQueue<X>((a,b) -> a.val - b.val);
+		
+		X five = new X(5);
+		
+		pq.add(new X(10));
+		pq.add(five);
+		pq.add(new X(20));
+		pq.add(new X(15));
+		five.val = 100;
+		
+		while (!pq.isEmpty()) {
+			X x = pq.poll();
+			System.out.println(x.val);
+		}
+	}
+	
+	public static void main22(String[] args) {
 		Map<Integer, String> tmap = new TreeMap<Integer, String>((a,b) -> b - a);
 		tmap.put(1, "1");
 		tmap.put(100, "100");
@@ -99,4 +117,11 @@ public class Miscell {
 
 	}
 
+}
+
+class X {
+	int val;
+	public X(int x) {
+		this.val = x;
+	}
 }
